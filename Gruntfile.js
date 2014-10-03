@@ -27,6 +27,8 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: appConfig,
 
+
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
@@ -351,7 +353,18 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
+    },
+
+    bootlint: {
+    options: {
+      stoponerror: false,
+      relaxerror: ['<head> is missing UTF-8 charset <meta> tag', '<head> is missing X-UA-Compatible <meta> tag that disables old IE compatibility modes',
+'<head> is missing viewport <meta> tag that enables responsiveness', 'Unable to locate jQuery, which is required for Bootstrap\'s JavaScript plugins to work', 'Document is missing a DOCTYPE declaration'
+       ]
+    },
+    files: ['app/views/**.html', 'app/index.html'],
+  }
+
   });
 
 
@@ -405,4 +418,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-bootlint');
 };
